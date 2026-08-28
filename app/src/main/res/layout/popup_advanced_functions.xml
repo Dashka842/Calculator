@@ -38,7 +38,7 @@
 
         <Button android:id="@+id/popupTan" android:background="@drawable/popup_button_bg" app:backgroundTint="@null" android:textColor="#FFFFFF" android:textSize="20sp" android:layout_width="0dp" android:layout_height="75dp" android:layout_columnWeight="1" android:text="tan" />
         <Button android:id="@+id/popupLog" android:background="@drawable/popup_button_bg" app:backgroundTint="@null" android:textColor="#FFFFFF" android:textSize="20sp" android:layout_width="0dp" android:layout_height="75dp" android:layout_columnWeight="1" android:text="log" />
-        <Button android:id="@+id/popupPi" android:background="@drawable/popup_button_bg" app:backgroundTint="@null" android:textColor="#FFFFFF" android:textSize="28sp" android:layout_width="0dp" android:layout_height="75dp" android:layout_columnWeight="1" android:text="π" />
+        <Button android:id="@+id/popupPi" android:background="@drawable/popup_button_bg" app:backgroundTint="@null" android:textColor="#FFFFFF" android:textSize="32sp" android:layout_width="0dp" android:layout_height="75dp" android:layout_columnWeight="1" android:text="π" android:textStyle="bold" />
     </GridLayout>
 
     <!-- === СТРАНИЦА 2: 3×3 === -->
