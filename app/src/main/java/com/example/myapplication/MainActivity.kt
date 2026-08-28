@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -14,6 +15,7 @@ import android.widget.Toast
 import android.content.Context
 import android.content.ClipboardManager
 import android.content.ClipData
+import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +43,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Устанавливаем цвет статус-бара
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorStatusBar)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 
         tvExpression = findViewById(R.id.tvExpression)
         tvDisplay = findViewById(R.id.tvDisplay)

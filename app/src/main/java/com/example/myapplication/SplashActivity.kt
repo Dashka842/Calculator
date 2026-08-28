@@ -8,9 +8,11 @@ import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.VideoView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 
 class SplashActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
 
@@ -23,6 +25,10 @@ class SplashActivity : AppCompatActivity(), GestureDetector.OnGestureListener {
         setTheme(R.style.Theme_Splash)
 
         super.onCreate(savedInstanceState)
+
+        // Устанавливаем цвет статус-бара
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorStatusBar)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 
         supportActionBar?.hide()
 
