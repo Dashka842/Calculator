@@ -29,10 +29,10 @@ class MainActivity : AppCompatActivity() {
 
     // Все тригонометрические функции (для валидации)
     private val allTrigFunctions = listOf(
-        "arcsin", "arccos", "arctan",
+        "arcsin", "arccos", "arctan", "arccot",
         "sinh", "cosh", "tanh", "coth",
         "sin", "cos", "tan", "cot",
-        "log", "ln", "√", "abs", "fact"
+        "log", "ln", "√", "abs", "exp", "fact"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -149,29 +149,44 @@ class MainActivity : AppCompatActivity() {
                 popupView.findViewById<Button>(R.id.popupX2).setOnClickListener { insertText("^2"); advancedPopup?.dismiss() }
                 popupView.findViewById<Button>(R.id.popupX3).setOnClickListener { insertText("^3"); advancedPopup?.dismiss() }
 
-                // Факториал с защитой от ввода в неположенном месте
+                // === СТРАНИЦА 1: sin, cos, tg, ctg, √, !, log, ln ===
+                popupView.findViewById<Button>(R.id.popupSin).setOnClickListener { insertFunction("sin("); advancedPopup?.dismiss() }
+                popupView.findViewById<Button>(R.id.popupCos).setOnClickListener { insertFunction("cos("); advancedPopup?.dismiss() }
+                
+                // Добавляем tg и ctg - создадим кнопки динамически или используем существующие
+                // Для этого нужно обновить layout, но пока используем долгие нажатия
+                popupView.findViewById<Button>(R.id.popupTan).setOnClickListener { insertFunction("tan("); advancedPopup?.dismiss() }
+                
+                // Долгое нажатие на tan для ctg
+                popupView.findViewById<Button>(R.id.popupTan).setOnLongClickListener {
+                    insertFunction("cot(")
+                    advancedPopup?.dismiss()
+                    true
+                }
+                
+                popupView.findViewById<Button>(R.id.popupSqrt).setOnClickListener { insertFunction("√("); advancedPopup?.dismiss() }
                 popupView.findViewById<Button>(R.id.popupFact).setOnClickListener {
                     val cursorPos = tvExpression.selectionStart
                     val expr = state.expression
-
-                    // Разрешаем '!' только если перед ним цифра, ')', 'π' или 'e'
                     val canInsertFactorial = cursorPos > 0 &&
                             (expr[cursorPos - 1].isDigit() || expr[cursorPos - 1] == ')' || expr[cursorPos - 1] == 'π' || expr[cursorPos - 1] == 'e')
-
                     if (canInsertFactorial) {
                         insertText("!")
                     }
                     advancedPopup?.dismiss()
                 }
+                popupView.findViewById<Button>(R.id.popupLog).setOnClickListener { insertFunction("log("); advancedPopup?.dismiss() }
+                
+                // Долгое нажатие на log для ln
+                popupView.findViewById<Button>(R.id.popupLog).setOnLongClickListener {
+                    insertFunction("ln(")
+                    advancedPopup?.dismiss()
+                    true
+                }
+                
+                popupView.findViewById<Button>(R.id.popupPi).setOnClickListener { insertText("π"); advancedPopup?.dismiss() }
 
-                popupView.findViewById<Button>(R.id.popupSqrt).setOnClickListener { insertFunction("√("); advancedPopup?.dismiss() }
-
-                // Обычный клик для тригонометрии
-                popupView.findViewById<Button>(R.id.popupSin).setOnClickListener { insertFunction("sin("); advancedPopup?.dismiss() }
-                popupView.findViewById<Button>(R.id.popupCos).setOnClickListener { insertFunction("cos("); advancedPopup?.dismiss() }
-                popupView.findViewById<Button>(R.id.popupTan).setOnClickListener { insertFunction("tan("); advancedPopup?.dismiss() }
-
-                // Долгое нажатие - открывает круговой селектор
+                // Долгое нажатие для тригонометрии с выбором угла
                 popupView.findViewById<Button>(R.id.popupSin).setOnLongClickListener {
                     showAngleSelector("sin")
                     advancedPopup?.dismiss()
@@ -182,24 +197,32 @@ class MainActivity : AppCompatActivity() {
                     advancedPopup?.dismiss()
                     true
                 }
-                popupView.findViewById<Button>(R.id.popupTan).setOnLongClickListener {
-                    showAngleSelector("tan")
-                    advancedPopup?.dismiss()
-                    true
-                }
 
-                popupView.findViewById<Button>(R.id.popupLog).setOnClickListener { insertFunction("log("); advancedPopup?.dismiss() }
-                popupView.findViewById<Button>(R.id.popupPi).setOnClickListener { insertText("pi"); advancedPopup?.dismiss() }
-
-                // === СТРАНИЦА 2 ===
+                // === СТРАНИЦА 2: arcsin, arccos, arctg, arcctg, sh, ch, th, |x|, e^x, e ===
                 popupView.findViewById<Button>(R.id.popupAsin).setOnClickListener { insertFunction("arcsin("); advancedPopup?.dismiss() }
                 popupView.findViewById<Button>(R.id.popupAcos).setOnClickListener { insertFunction("arccos("); advancedPopup?.dismiss() }
                 popupView.findViewById<Button>(R.id.popupAtan).setOnClickListener { insertFunction("arctan("); advancedPopup?.dismiss() }
+                
+                // Долгое нажатие на arctan для arcctg
+                popupView.findViewById<Button>(R.id.popupAtan).setOnLongClickListener {
+                    insertFunction("arccot(")
+                    advancedPopup?.dismiss()
+                    true
+                }
+                
                 popupView.findViewById<Button>(R.id.popupSinh).setOnClickListener { insertFunction("sinh("); advancedPopup?.dismiss() }
                 popupView.findViewById<Button>(R.id.popupCosh).setOnClickListener { insertFunction("cosh("); advancedPopup?.dismiss() }
                 popupView.findViewById<Button>(R.id.popupTanh).setOnClickListener { insertFunction("tanh("); advancedPopup?.dismiss() }
+                
+                // Долгое нажатие на tanh для coth
+                popupView.findViewById<Button>(R.id.popupTanh).setOnLongClickListener {
+                    insertFunction("coth(")
+                    advancedPopup?.dismiss()
+                    true
+                }
+                
                 popupView.findViewById<Button>(R.id.popupAbs).setOnClickListener { insertFunction("abs("); advancedPopup?.dismiss() }
-                popupView.findViewById<Button>(R.id.popupEx).setOnClickListener { insertText("e^"); advancedPopup?.dismiss() }
+                popupView.findViewById<Button>(R.id.popupEx).setOnClickListener { insertFunction("exp("); advancedPopup?.dismiss() }
                 popupView.findViewById<Button>(R.id.popupE).setOnClickListener { insertText("e"); advancedPopup?.dismiss() }
             }
 
