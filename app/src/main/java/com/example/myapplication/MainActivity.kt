@@ -617,6 +617,33 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // 3.1. === УДАЛЕНИЕ ФУНКЦИИ, ЕСЛИ КУРСОР ПЕРЕД СКОБКОЙ ===
+        // Проверяем случай, когда курсор стоит перед '(' функции (например: sin|( )
+        if (start < expr.length && expr[start] == '(') {
+            val functions = listOf(
+                "arcsin", "arccos", "arctan",
+                "sinh", "cosh", "tanh", "coth",
+                "sin", "cos", "tan", "cot",
+                "log", "ln", "√", "abs", "fact"
+            )
+
+            val prefix = expr.substring(0, start)
+            for (func in functions) {
+                if (prefix.endsWith(func)) {
+                    // Нашли совпадение! Удаляем название функции
+                    val deleteLength = func.length
+                    val newStart = start - deleteLength
+                    val newExpr = expr.substring(0, newStart) + expr.substring(start)
+
+                    state.setExpression(newExpr)
+                    tvExpression.setText(newExpr)
+                    tvExpression.setSelection(newStart)
+                    updateLiveResult()
+                    return // Выходим, удаление выполнено
+                }
+            }
+        }
+
         // 4. Если это не функция, или курсор внутри названия функции, блокируем удаление букв
         // (чтобы нельзя было стереть "si" из "sin", оставив "n(")
         if (isCursorInsideFunctionName()) return
@@ -860,9 +887,14 @@ class MainActivity : AppCompatActivity() {
 
         if (cursorPos <= 0 || cursorPos > expr.length) return false
 
+        // Специальная проверка для символа корня √
+        if (cursorPos > 0 && expr[cursorPos - 1] == '√') {
+            return true
+        }
+
         // Идём назад от курсора, собираем буквы
         var i = cursorPos - 1
-        while (i >= 0 && expr[i].isLetter()) {
+        while (i >= 0 && (expr[i].isLetter() || expr[i] == '√')) {
             i--
         }
 
