@@ -16,9 +16,8 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
-        android:background="#FF9800"
+        android:background="@android:color/transparent"
         android:padding="15dp"
-        android:layout_margin="-20dp"
         android:layout_marginBottom="15dp" />
 
     <!-- ScrollView с текстом числа π -->
@@ -35,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#333333"
-            android:textSize="24sp"
+            android:textSize="32sp"
             android:fontFamily="sans-serif-medium"
             android:lineSpacingExtra="4dp"
             android:textIsSelectable="true" />
