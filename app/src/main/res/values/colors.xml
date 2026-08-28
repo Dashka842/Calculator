@@ -3,4 +3,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="black">#000000</color>
     <color name="splash_background">#1E1E1E</color>
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#F57C00</color>
+    <color name="colorAccent">#FF9800</color>
+    <color name="colorStatusBar">#FFB74D</color>
 </resources>
