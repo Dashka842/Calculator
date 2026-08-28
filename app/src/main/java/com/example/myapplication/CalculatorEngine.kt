@@ -93,7 +93,7 @@ class CalculatorEngine {
                     return result
                 }
 
-                val functions = listOf("arcsin", "arccos", "arctan", "sinh", "cosh", "tanh", "coth", "sin", "cos", "tan", "cot", "log", "ln", "sqrt", "abs")
+                val functions = listOf("arcsin", "arccos", "arctan", "sinh", "cosh", "tanh", "coth", "sin", "cos", "tan", "cot", "log", "ln", "√", "abs")
                 for (func in functions) {
                     if (s.substring(pos).startsWith(func)) {
                         pos += func.length
@@ -159,7 +159,7 @@ class CalculatorEngine {
                     // === ПРОВЕРКА ДИАПАЗОНА ДЛЯ ЛОГАРИФМОВ И КОРНЯ ===
                     "log" -> if (arg > 0) log10(arg) else Double.NaN
                     "ln" -> if (arg > 0) ln(arg) else Double.NaN
-                    "sqrt" -> if (arg >= 0) sqrt(arg) else Double.NaN
+                    "√" -> if (arg >= 0) sqrt(arg) else Double.NaN
                     "abs" -> abs(arg)
 
                     else -> Double.NaN
@@ -208,7 +208,7 @@ class CalculatorEngine {
         if (expr.first() in listOf('+', '×', '÷', '.', '^', '!', ')', '°')) return false
 
         var bracketBalance = 0
-        val validFuncs = listOf("arcsin", "arccos", "arctan", "sinh", "cosh", "tanh", "coth", "sin", "cos", "tan", "cot", "log", "ln", "sqrt", "abs", "fact", "pi")
+        val validFuncs = listOf("arcsin", "arccos", "arctan", "sinh", "cosh", "tanh", "coth", "sin", "cos", "tan", "cot", "log", "ln", "√", "abs", "fact", "pi")
         var tempExpr = expr
         for (f in validFuncs.sortedByDescending { it.length }) {
             tempExpr = tempExpr.replace(f, "1")

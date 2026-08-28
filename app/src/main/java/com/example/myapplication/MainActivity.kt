@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         "arcsin", "arccos", "arctan",
         "sinh", "cosh", "tanh", "coth",
         "sin", "cos", "tan", "cot",
-        "log", "ln", "sqrt", "abs", "fact"
+        "log", "ln", "√", "abs", "fact"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -164,7 +164,7 @@ class MainActivity : AppCompatActivity() {
                     advancedPopup?.dismiss()
                 }
 
-                popupView.findViewById<Button>(R.id.popupSqrt).setOnClickListener { insertFunction("sqrt("); advancedPopup?.dismiss() }
+                popupView.findViewById<Button>(R.id.popupSqrt).setOnClickListener { insertFunction("√("); advancedPopup?.dismiss() }
 
                 // Обычный клик для тригонометрии
                 popupView.findViewById<Button>(R.id.popupSin).setOnClickListener { insertFunction("sin("); advancedPopup?.dismiss() }
@@ -597,7 +597,7 @@ class MainActivity : AppCompatActivity() {
                 "arcsin", "arccos", "arctan",
                 "sinh", "cosh", "tanh", "coth",
                 "sin", "cos", "tan", "cot",
-                "log", "ln", "sqrt", "abs", "fact"
+                "log", "ln", "√", "abs", "fact"
             )
 
             val prefix = expr.substring(0, start - 1)
