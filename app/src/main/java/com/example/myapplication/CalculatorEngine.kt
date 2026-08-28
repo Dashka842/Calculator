@@ -93,7 +93,7 @@ class CalculatorEngine {
                     return result
                 }
 
-                val functions = listOf("arcsin", "arccos", "arctan", "sinh", "cosh", "tanh", "coth", "sin", "cos", "tan", "cot", "log", "ln", "√", "abs")
+                val functions = listOf("arcsin", "arccos", "arctan", "arccot", "sinh", "cosh", "tanh", "coth", "sin", "cos", "tan", "cot", "log", "ln", "√", "abs", "exp")
                 for (func in functions) {
                     if (s.substring(pos).startsWith(func)) {
                         pos += func.length
@@ -127,8 +127,8 @@ class CalculatorEngine {
                     return value
                 }
 
-                if (s.substring(pos).startsWith("pi")) {
-                    pos += 2
+                if (s.substring(pos).startsWith("π")) {
+                    pos += 1
                     return Math.PI
                 }
                 if (s.substring(pos).startsWith("e") && (pos + 1 >= s.length || !s[pos + 1].isLetter())) {
@@ -150,6 +150,7 @@ class CalculatorEngine {
                     "arcsin" -> if (arg in -1.0..1.0) asin(arg) else Double.NaN
                     "arccos" -> if (arg in -1.0..1.0) acos(arg) else Double.NaN
                     "arctan" -> atan(arg) // диапазон не ограничен
+                    "arccot" -> if (atan(arg) != 0.0) PI / 2.0 - atan(arg) else Double.NaN
 
                     "sinh" -> sinh(arg)
                     "cosh" -> cosh(arg)
@@ -161,6 +162,7 @@ class CalculatorEngine {
                     "ln" -> if (arg > 0) ln(arg) else Double.NaN
                     "√" -> if (arg >= 0) sqrt(arg) else Double.NaN
                     "abs" -> abs(arg)
+                    "exp" -> exp(arg) // e^x
 
                     else -> Double.NaN
                 }
@@ -208,7 +210,7 @@ class CalculatorEngine {
         if (expr.first() in listOf('+', '×', '÷', '.', '^', '!', ')', '°')) return false
 
         var bracketBalance = 0
-        val validFuncs = listOf("arcsin", "arccos", "arctan", "sinh", "cosh", "tanh", "coth", "sin", "cos", "tan", "cot", "log", "ln", "√", "abs", "fact", "pi")
+        val validFuncs = listOf("arcsin", "arccos", "arctan", "arccot", "sinh", "cosh", "tanh", "coth", "sin", "cos", "tan", "cot", "log", "ln", "√", "abs", "exp", "fact", "π")
         var tempExpr = expr
         for (f in validFuncs.sortedByDescending { it.length }) {
             tempExpr = tempExpr.replace(f, "1")
