@@ -11,6 +11,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.LinearLayout
 import android.widget.Toast
+import android.content.Context
+import android.content.ClipboardManager
+import android.content.ClipData
 
 class MainActivity : AppCompatActivity() {
 
