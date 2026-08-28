@@ -614,6 +614,19 @@ class MainActivity : AppCompatActivity() {
                     updateLiveResult()
                     return // Выходим, удаление выполнено
                 }
+                // Проверяем случай с умножением перед функцией: ×func(
+                if (prefix.endsWith("×$func")) {
+                    // Удаляем ×, название функции и скобку
+                    val deleteLength = func.length + 2 // × + func + (
+                    val newStart = start - deleteLength
+                    val newExpr = expr.substring(0, newStart) + expr.substring(start)
+
+                    state.setExpression(newExpr)
+                    tvExpression.setText(newExpr)
+                    tvExpression.setSelection(newStart)
+                    updateLiveResult()
+                    return // Выходим, удаление выполнено
+                }
             }
         }
 
@@ -632,6 +645,19 @@ class MainActivity : AppCompatActivity() {
                 if (prefix.endsWith(func)) {
                     // Нашли совпадение! Удаляем название функции
                     val deleteLength = func.length
+                    val newStart = start - deleteLength
+                    val newExpr = expr.substring(0, newStart) + expr.substring(start)
+
+                    state.setExpression(newExpr)
+                    tvExpression.setText(newExpr)
+                    tvExpression.setSelection(newStart)
+                    updateLiveResult()
+                    return // Выходим, удаление выполнено
+                }
+                // Проверяем случай с умножением перед функцией: ×func|(
+                if (prefix.endsWith("×$func")) {
+                    // Удаляем × и название функции
+                    val deleteLength = func.length + 1 // × + func
                     val newStart = start - deleteLength
                     val newExpr = expr.substring(0, newStart) + expr.substring(start)
 
