@@ -1063,8 +1063,8 @@ class MainActivity : AppCompatActivity() {
         tvPiValue.text = piValue
 
         btnCopyPi.setOnClickListener {
-            val clipboard = getSystemService(android.content.CLIPBOARD_SERVICE) as android.content.ClipboardManager
-            val clip = android.content.ClipData.newPlainText("Pi value", piValue)
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Pi value", piValue)
             clipboard.setPrimaryClip(clip)
             Toast.makeText(this, "Число π скопировано в буфер обмена", Toast.LENGTH_SHORT).show()
             dialog.dismiss()
