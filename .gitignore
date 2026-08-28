@@ -1,32 +1,29 @@
 ```
-# Compiled and build artifacts
-*.class
-*.dex
-*.so
-*.aar
+# Build outputs
 build/
-.gradle/
+dist/
+bin/
+gen/
+
 # Dependencies
-.libs/
-# Editors
+.gradle/
+node_modules/
+vendor/
+
+# IDE files
 .idea/
-*.iml
-*.iws
 .vscode/
-# Logs and temp files
+*.iml
+*.ipr
+*.iws
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
 *.log
-*.tmp
-# Environment
-.env
-.env.local
-.env.*
-# Coverage reports
-coverage/
-htmlcov/
-*.coverage
-# Android specific
-*.apk
-*.aab
+
+# Local configuration
 local.properties
-gradle-wrapper.properties
 ```
