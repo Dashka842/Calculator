@@ -1,32 +1,4 @@
 ```
-# Compiled and build artifacts
-*.class
-*.dex
-*.so
-*.aar
-*.apk
-*.jar
-
-# Dependencies
-libs/
-build/
-
-# Logs and temp files
-*.log
-*.tmp
-
-# Environment
-.env
-.env.local
-*.env.*
-
-# Editors
-.idea/
-*.iml
-*.iws
-.vscode/
-
-# OS generated files
-.DS_Store
-Thumbs.db
+.gradle/
+local.properties
 ```

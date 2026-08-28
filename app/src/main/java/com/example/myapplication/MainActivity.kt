@@ -860,9 +860,14 @@ class MainActivity : AppCompatActivity() {
 
         if (cursorPos <= 0 || cursorPos > expr.length) return false
 
+        // Специальная проверка для символа корня √
+        if (cursorPos > 0 && expr[cursorPos - 1] == '√') {
+            return true
+        }
+
         // Идём назад от курсора, собираем буквы
         var i = cursorPos - 1
-        while (i >= 0 && expr[i].isLetter()) {
+        while (i >= 0 && (expr[i].isLetter() || expr[i] == '√')) {
             i--
         }
 
