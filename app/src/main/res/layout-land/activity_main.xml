@@ -1,136 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="12dp"
-    android:background="#1E1E1E">
+    android:background="@drawable/gradient_background"
+    android:padding="4dp">
 
-    <!-- ЛЕВАЯ ЧАСТЬ: Дисплей (занимает 1 часть экрана) -->
+    <!-- ЛЕВАЯ ЧАСТЬ: Дисплей и доп. кнопки -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="1"
         android:orientation="vertical"
-        android:gravity="end|bottom"
-        android:paddingEnd="16dp"
-        android:paddingBottom="16dp">
+        android:padding="8dp">
 
-        <!-- Верхняя строка: выражение + стрелка истории -->
+        <!-- Заголовок "Калькулятор" в левом верхнем углу -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Калькулятор"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_gravity="start"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Поле ввода выражения (занимает основную часть) -->
+        <EditText
+            android:id="@+id/etInput"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/edittext_bg"
+            android:gravity="top|start"
+            android:inputType="none"
+            android:cursorVisible="true"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:padding="8dp"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:importantForAutofill="no"/>
+
+        <!-- Нижняя панель: f(x), Степень, Удаление -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="end|center_vertical">
+            android:layout_marginTop="8dp">
 
-            <EditText
-                android:id="@+id/tvExpression"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFx"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="0dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:textColor="#FFFFFF"
-                android:textSize="42sp"
-                android:textStyle="bold"
-                android:maxLines="3"
-                android:scrollbars="vertical"
-                android:fadeScrollbars="false"
-                android:ellipsize="none"
-                android:background="@android:color/transparent"
-                android:cursorVisible="true"
-                android:textCursorDrawable="@drawable/cursor_white"
-                android:textIsSelectable="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:inputType="none"
-                android:importantForAutofill="no"
-                android:padding="0dp"
-                android:layout_margin="0dp" />
+                android:text="f(x)"
+                android:textColor="#FF9800"
+                app:strokeColor="#FF9800"
+                android:layout_marginEnd="4dp"/>
 
-            <TextView
-                android:id="@+id/tvHistoryArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="↩"
-                android:textColor="#FF9500"
-                android:textSize="32sp"
-                android:visibility="gone"
-                android:paddingStart="12dp"
-                android:clickable="true"
-                android:focusable="true" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPower"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="x^y"
+                android:textColor="#FF9800"
+                app:strokeColor="#FF9800"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBackspace"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:text="⌫"
+                android:textColor="#FF9800"
+                app:strokeColor="#FF9800"
+                android:layout_marginStart="4dp"/>
         </LinearLayout>
-
-        <!-- Нижняя строка: предварительный ответ -->
-        <TextView
-            android:id="@+id/tvDisplay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:text="0"
-            android:textColor="#888888"
-            android:textSize="32sp"
-            android:maxLines="1"
-            android:scrollHorizontally="true"
-            android:ellipsize="end"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Кнопка удаления -->
-        <TextView
-            android:id="@+id/btnBackSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="⌫"
-            android:textColor="#FF9500"
-            android:textSize="28sp"
-            android:padding="8dp"
-            android:clickable="true"
-            android:focusable="true" />
     </LinearLayout>
 
-    <!-- ПРАВАЯ ЧАСТЬ: Сетка кнопок (занимает 2 части экрана) -->
+    <!-- ПРАВАЯ ЧАСТЬ: Кнопки (цифры и операторы) -->
     <GridLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1.5"
-        android:columnCount="4"
-        android:rowCount="5"
-        android:useDefaultMargins="false"
-        android:alignmentMode="alignMargins">
+        android:columnCount="5"
+        android:rowCount="6"
+        android:alignmentMode="alignMargins"
+        android:padding="4dp">
 
         <!-- Ряд 1 -->
-        <Button android:id="@+id/btnClear"   style="@style/CalcButtonGray" android:text="C" />
-        <Button android:id="@+id/btnBracket" style="@style/CalcButtonGray" android:text="()" android:textSize="28sp" />
-        <Button android:id="@+id/btnAns"     style="@style/CalcButtonGray" android:text="ANS" android:textSize="16sp" android:enabled="false" android:alpha="0.5" />
-        <Button android:id="@+id/btnDiv"     style="@style/CalcButtonOrange" android:text="÷" />
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnClear" android:text="C" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnPercent" android:text="%" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnDivide" android:text="÷" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnSqrt" android:text="√" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnFact" android:text="!" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
 
         <!-- Ряд 2 -->
-        <Button android:id="@+id/btn7" style="@style/CalcButton" android:text="7" />
-        <Button android:id="@+id/btn8" style="@style/CalcButton" android:text="8" />
-        <Button android:id="@+id/btn9" style="@style/CalcButton" android:text="9" />
-        <Button android:id="@+id/btnMul" style="@style/CalcButtonOrange" android:text="×" />
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btn7" android:text="7" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btn8" android:text="8" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btn9" android:text="9" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnMultiply" android:text="×" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnLog" android:text="log" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
 
         <!-- Ряд 3 -->
-        <Button android:id="@+id/btn4" style="@style/CalcButton" android:text="4" />
-        <Button android:id="@+id/btn5" style="@style/CalcButton" android:text="5" />
-        <Button android:id="@+id/btn6" style="@style/CalcButton" android:text="6" />
-        <Button android:id="@+id/btnSub" style="@style/CalcButtonOrange" android:text="−" />
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btn4" android:text="4" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btn5" android:text="5" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btn6" android:text="6" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnSubtract" android:text="-" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnLn" android:text="ln" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
 
         <!-- Ряд 4 -->
-        <Button android:id="@+id/btn1" style="@style/CalcButton" android:text="1" />
-        <Button android:id="@+id/btn2" style="@style/CalcButton" android:text="2" />
-        <Button android:id="@+id/btn3" style="@style/CalcButton" android:text="3" />
-        <Button android:id="@+id/btnAdd" style="@style/CalcButtonOrange" android:text="+" />
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btn1" android:text="1" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btn2" android:text="2" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btn3" android:text="3" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnAdd" android:text="+" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnSin" android:text="sin" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
 
         <!-- Ряд 5 -->
-        <Button
-            android:id="@+id/btn0"
-            style="@style/CalcButton"
-            android:text="0"
-            android:layout_columnSpan="2"
-            android:layout_columnWeight="2"
-            android:layout_gravity="fill_horizontal" />
-        <Button android:id="@+id/btnDot"  style="@style/CalcButton" android:text="." />
-        <Button android:id="@+id/btnEqual" style="@style/CalcButtonOrange" android:text="=" />
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btn0" android:text="0" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButtonNum" android:id="@+id/btnDot" android:text="." android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnEquals" android:text="=" android:layout_columnWeight="1" android:layout_rowWeight="1" app:backgroundTint="#FF9800"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnCos" android:text="cos" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnTan" android:text="tg" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+
+        <!-- Ряд 6 (дополнительные кнопки если нужно, или растянуть предыдущие) -->
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnPi" android:text="π" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnE" android:text="e" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnOpenParen" android:text="(" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnCloseParen" android:text=")" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+        <com.google.android.material.button.MaterialButton style="@style/CalcButton" android:id="@+id/btnCtg" android:text="ctg" android:layout_columnWeight="1" android:layout_rowWeight="1"/>
+
     </GridLayout>
 </LinearLayout>

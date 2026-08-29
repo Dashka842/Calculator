@@ -12,6 +12,12 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="CalcButtonNum" parent="CalcButton">
+        <item name="backgroundTint">#FFFFFF</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="CalcButtonGray" parent="CalcButton">
         <item name="android:backgroundTint">#555555</item>
         <item name="android:textColor">#FFFFFF</item>
